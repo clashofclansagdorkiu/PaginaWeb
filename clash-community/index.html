@@ -55,31 +55,8 @@
         </div>
     </div>
 
-    <script type="module">
-        import { supabase } from './assets/js/supabaseClient.js';
-
-        const loginForm = document.getElementById('loginForm');
-        const errorMsg = document.getElementById('errorMessage');
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // 1. Intentamos iniciar sesión con usuario y contraseña
-            let { data, error } = await supabase.auth.signInWithPassword({
-                email: username,
-                password: password
-            });
-
-            if (error) {
-                errorMsg.textContent = "Error: " + error.message;
-                errorMsg.classList.remove('hidden');
-            } else {
-                // Éxito
-                window.location.href = "dashboard.html";
-            }
-        });
-    </script>
+        <script type="module" src="./assets/js/auth.js">
+            
+        </script>
 </body>
 </html>
