@@ -5,6 +5,7 @@ import { supabase } from './supabaseClient.js';
 const loginForm = document.getElementById('loginForm');
 const errorMsg = document.getElementById('errorMessage');
 
+// Comprueba si el usuario ya está logueado
 async function checkUserSession() {
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
@@ -12,28 +13,33 @@ async function checkUserSession() {
     }
 }
 
-// --- LÓGICA DE LOGIN (SOLO ACCESO) ---
+// --- LÓGICA DE LOGIN POR NOMBRE DE USUARIO (SOLO) ---
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMsg.classList.add('hidden'); 
 
-    // Ojo: Por ahora usamos el campo "email" para el login.
-    // Aunque tú uses un "usuario" en el formulario, Supabase internamente necesita un formato de email.
-    // La solución para un LOGIN por nombre de usuario PURO la haremos después 
-    // con una función personalizada (Edge Function) que busque en la tabla 'profiles'.
-    const email = document.getElementById('email').value;
+    // 1. Capturamos los datos del formulario
+    const username = document.getElementById('username').value.toLowerCase().trim();
     const password = document.getElementById('password').value;
 
-    // Solo intentamos INICIAR SESIÓN (ya no hay registro automático)
-    let { error } = await supabase.auth.signInWithPassword({ email, password });
+    // 2. CONSTRUIMOS EL EMAIL FICTICIO DE ACCESO
+    // Usamos un dominio fijo para el clan
+    const internalEmail = `${username}@comunidadlezo.com`;
+
+    // 3. Intentamos iniciar sesión con el email ficticio y la contraseña
+    let { error } = await supabase.auth.signInWithPassword({ 
+        email: internalEmail, 
+        password: password 
+    });
 
     if (error) {
-        errorMsg.textContent = "Error de acceso: Credenciales no válidas. Contacta al Administrador para la creación de tu cuenta.";
+        // En este punto, solo puede ser un error de credenciales (usuario no existe o contraseña incorrecta)
+        errorMsg.textContent = "Error de acceso: Nombre de usuario o contraseña incorrectos. Si no tiene cuenta, solicite una al administrador";
         errorMsg.classList.remove('hidden');
     } else {
-        // Éxito
+        // 4. Éxito
         window.location.href = "dashboard.html"; 
     }
 });
 
-checkUserSession(); // Ejecutar al cargar
+checkUserSession(); // Inicializar
