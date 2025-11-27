@@ -1,5 +1,5 @@
 // Importamos la conexión con Supabase
-import { supabase } from './supabaseClient.js';
+import { supabase } from './supabaseCliente.js';
 
 // --- ELEMENTOS DEL DOM ---
 const loginForm = document.getElementById('loginForm');
