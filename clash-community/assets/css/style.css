@@ -3,7 +3,7 @@
 
 /* Marco ornamental estilo hispánico */
 .ornamento {
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     position: relative;
     overflow: hidden;
@@ -13,19 +13,20 @@
 .ornamento::after {
     content: '';
     position: absolute;
-    width: 140px;
-    height: 140px;
-    background: rgba(255, 0, 0, 0.15);
+    width: 120px;
+    height: 120px;
+    background: rgba(139, 0, 0, 0.1); /* rojo suave */
     border-radius: 50%;
-    filter: blur(40px);
+    filter: blur(35px);
 }
 
 .ornamento::before {
-    top: -40px;
-    left: -40px;
+    top: -30px;
+    left: -30px;
 }
 
 .ornamento::after {
-    bottom: -40px;
-    right: -40px;
+    bottom: -30px;
+    right: -30px;
 }
+

@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> LEZO </title>
+    <title>LEZO</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/Logo_BdL.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -13,7 +17,8 @@
                         clash: {
                             gold: '#FFD700',
                             dark: '#1a1a1a',
-                            light: '#2a2a2a'
+                            light: '#2a2a2a',
+                            redsoft: '#8B0000' /* rojo suave para acentos */
                         }
                     },
                     fontFamily: {
@@ -28,46 +33,46 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="bg-red-900 text-white h-screen flex items-center justify-center bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/70">
+<body class="bg-gray-900 text-white h-screen flex items-center justify-center bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
 
-    <div class="ornamento bg-red-950/70 p-8 rounded-xl shadow-2xl w-full max-w-md border border-red-700 backdrop-blur-sm">
+    <div class="ornamento bg-gray-800/70 p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-700 backdrop-blur-sm">
         
-        <!-- Logo (poner url cuando lo tengas) -->
+        <!-- Logo en la parte superior -->
         <div class="text-center mb-6">
-            <img src=".images/Logo_BdL.png" alt="Logo" class="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-white shadow-lg">
+            <img src="./assets/images/Logo_BdL.png" alt="Logo" class="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-white shadow-lg">
         </div>
 
         <div class="text-center mb-8">
-            <h1 class="text-4xl font-hispanic font-bold text-white drop-shadow-[0_0_6px_rgba(255,0,0,0.7)]">
+            <h1 class="text-4xl font-hispanic font-bold text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">
                 LEZO
             </h1>
-            <p class="text-red-200 text-sm italic">
+            <p class="text-gray-300 text-sm italic">
                 Comunidad BdL
             </p>
         </div>
 
         <form id="loginForm" class="space-y-6">
             <div>
-                <label for="username" class="block text-sm font-medium text-red-200">Usuario</label>
+                <label for="username" class="block text-sm font-medium text-gray-300">Usuario</label>
                 <input type="text" id="username" required 
-                    class="mt-1 block w-full px-3 py-2 bg-red-800/50 border border-red-600 rounded-md text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white">
+                    class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-md text-white focus:outline-none focus:border-clash-redsoft focus:ring-1 focus:ring-clash-redsoft">
             </div>
 
             <div>
-                <label for="password" class="block text-sm font-medium text-red-200">Contraseña</label>
+                <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
                 <input type="password" id="password" required 
-                    class="mt-1 block w-full px-3 py-2 bg-red-800/50 border border-red-600 rounded-md text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white">
+                    class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-md text-white focus:outline-none focus:border-clash-redsoft focus:ring-1 focus:ring-clash-redsoft">
             </div>
 
             <div id="errorMessage" class="text-red-400 text-sm text-center hidden"></div>
 
             <button type="submit" 
-                class="w-full py-2 px-4 border border-red-800 rounded-md shadow-md text-sm font-medium text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-bold transition-all tracking-wide">
+                class="w-full py-2 px-4 border border-clash-redsoft rounded-md shadow-md text-sm font-medium text-white bg-clash-redsoft hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-bold transition-all tracking-wide">
                 ACCESO
             </button>
         </form>
 
-        <div class="mt-6 text-center text-xs text-red-300">
+        <div class="mt-6 text-center text-xs text-gray-400">
             <p>Si no tienes cuenta, se creará automáticamente al intentar entrar.</p>
         </div>
     </div>
