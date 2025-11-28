@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async (e) => {
 
     if (error) {
         // En este punto, solo puede ser un error de credenciales (usuario no existe o contraseña incorrecta)
-        errorMsg.textContent = "Error de acceso: Nombre de usuario o contraseña incorrectos. Si no tiene cuenta, solicite una al administrador";
+        errorMsg.textContent = "Error de acceso: Nombre de usuario o contraseña incorrectos.";
         errorMsg.classList.remove('hidden');
     } else {
         // 4. Éxito
