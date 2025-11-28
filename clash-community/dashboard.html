@@ -40,11 +40,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                <!-- Logo + LEZO como enlace -->
+                <a href="./dashboard.html" class="flex-shrink-0 flex items-center">
                     <img class="h-12 w-12 rounded-full border-2 border-white shadow-lg" src="./images/Logo_BdL.png" alt="Logo">
                     <span class="ml-3 text-white font-hispanic text-2xl drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">LEZO</span>
-                </div>
+                </a>
 
                 <!-- Menú principal -->
                 <div class="hidden md:flex space-x-6">
@@ -56,6 +56,8 @@
                     <a href="#" class="menu-link">Donaciones</a>
                     <a href="#" class="menu-link">Sugerencias</a>
                     <a href="#" class="menu-link">Perfil</a>
+                    <a href="#" class="menu-link">Tienda</a>
+                    <a href="#" class="menu-link">Ranking</a>
                 </div>
 
                 <!-- Botón menú móvil -->
@@ -76,14 +78,33 @@
             <a href="#" class="menu-link block">Donaciones</a>
             <a href="#" class="menu-link block">Sugerencias</a>
             <a href="#" class="menu-link block">Perfil</a>
+            <a href="#" class="menu-link block">Tienda</a>
+            <a href="#" class="menu-link block">Ranking</a>
         </div>
     </nav>
 
     <!-- Contenido del dashboard -->
-    <main class="pt-20 max-w-7xl mx-auto p-4">
-        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">Bienvenido a la Comunidad LEZO</h1>
-        <p class="text-gray-300">Aquí iría el contenido principal del dashboard, noticias, estadísticas y demás.</p>
+    <main class="pt-28 max-w-7xl mx-auto p-4 flex flex-col items-center">
+        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)] text-center">
+            Bienvenido a la Comunidad Blas de Lezo
+        </h1>
+        <p class="text-gray-300 text-center mb-12">
+            Explora nuestras noticias, eventos y foros. ¡Participa y diviértete con la comunidad!
+        </p>
     </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-gray-800/70 border-t border-gray-700 backdrop-blur-sm mt-auto w-full py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-gray-300">
+            <div class="flex items-center space-x-2 mb-2 md:mb-0">
+                <img src="./images/Nomad_Byte_Studios.png" alt="Nomad Byte Studios" class="h-8 w-auto">
+                <span>&copy; 2025 Nomad Byte Studios. Todos los derechos reservados.</span>
+            </div>
+            <div class="text-sm">
+                Contacto: info@nomadbyte.studio | Web: www.nomadbyte.studio
+            </div>
+        </div>
+    </footer>
 
     <!-- JS -->
     <script src="./assets/js/menu.js"></script>

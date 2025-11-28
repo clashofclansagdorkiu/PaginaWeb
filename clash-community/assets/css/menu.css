@@ -27,3 +27,8 @@
 .menu-link:hover::after {
     width: 100%;
 }
+
+/* Pie de página */
+footer img {
+    filter: drop-shadow(0 0 4px rgba(139,0,0,0.7));
+}
