@@ -1,0 +1,31 @@
+/* Fuente hispánica */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
+/* Marco ornamental estilo hispánico */
+.ornamento {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ornamento::before,
+.ornamento::after {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: rgba(255, 0, 0, 0.15);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+.ornamento::before {
+    top: -40px;
+    left: -40px;
+}
+
+.ornamento::after {
+    bottom: -40px;
+    right: -40px;
+}
