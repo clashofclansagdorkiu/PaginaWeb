@@ -27,10 +27,14 @@ loginForm.addEventListener('submit', async (e) => {
     const internalEmail = `${username}@comunidadlezo.com`;
 
     // 3. Intentamos iniciar sesión con el email ficticio y la contraseña
-    let { error } = await supabase.auth.signInWithPassword({ 
+    let { data, error } = await supabase.auth.signInWithPassword({ 
         email: internalEmail, 
         password: password 
     });
+
+    // 👇 AÑADE ESTA LÍNEA AQUÍ
+    console.log("ERROR SUPABASE:", error);
+
 
     if (error) {
         // En este punto, solo puede ser un error de credenciales (usuario no existe o contraseña incorrecta)
