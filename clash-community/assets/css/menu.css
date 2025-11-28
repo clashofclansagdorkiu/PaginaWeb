@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
+.menu-link {
+    color: white;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.menu-link:hover {
+    color: #FFD700; /* clash-gold */
+}
+
+/* Subrayado animado */
+.menu-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #FFD700;
+    transition: width 0.3s;
+}
+
+.menu-link:hover::after {
+    width: 100%;
+}

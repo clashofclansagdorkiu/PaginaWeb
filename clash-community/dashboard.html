@@ -1,10 +1,91 @@
-<html>
-    <head>
-        <title>Dashboard</title>
-    </head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEZO Dashboard</title>
 
-    <body
-        <h1>Welcome to the Dashboard</h1>
-        <p>This is your main dashboard where you can view your stats and manage your settings.</p>
-    </body>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./images/Logo_BdL.png">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clash: {
+                            gold: '#FFD700',
+                            dark: '#1a1a1a',
+                            light: '#2a2a2a',
+                            redsoft: '#8B0000'
+                        }
+                    },
+                    fontFamily: {
+                        hispanic: ['"Cinzel Decorative"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./assets/css/menu.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
+
+    <!-- Menú principal -->
+    <nav class="bg-gray-800/70 border-b border-gray-700 backdrop-blur-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-12 w-12 rounded-full border-2 border-white shadow-lg" src="./images/Logo_BdL.png" alt="Logo">
+                    <span class="ml-3 text-white font-hispanic text-2xl drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">LEZO</span>
+                </div>
+
+                <!-- Menú principal -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="menu-link">Noticias</a>
+                    <a href="#" class="menu-link">Buzón</a>
+                    <a href="#" class="menu-link">Chat</a>
+                    <a href="#" class="menu-link">Clanes</a>
+                    <a href="#" class="menu-link">Eventos</a>
+                    <a href="#" class="menu-link">Donaciones</a>
+                    <a href="#" class="menu-link">Sugerencias</a>
+                    <a href="#" class="menu-link">Perfil</a>
+                </div>
+
+                <!-- Botón menú móvil -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none text-2xl">&#9776;</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+            <a href="#" class="menu-link block">Noticias</a>
+            <a href="#" class="menu-link block">Buzón</a>
+            <a href="#" class="menu-link block">Chat</a>
+            <a href="#" class="menu-link block">Clanes</a>
+            <a href="#" class="menu-link block">Eventos</a>
+            <a href="#" class="menu-link block">Donaciones</a>
+            <a href="#" class="menu-link block">Sugerencias</a>
+            <a href="#" class="menu-link block">Perfil</a>
+        </div>
+    </nav>
+
+    <!-- Contenido del dashboard -->
+    <main class="pt-20 max-w-7xl mx-auto p-4">
+        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">Bienvenido a la Comunidad LEZO</h1>
+        <p class="text-gray-300">Aquí iría el contenido principal del dashboard, noticias, estadísticas y demás.</p>
+    </main>
+
+    <!-- JS -->
+    <script src="./assets/js/menu.js"></script>
+</body>
 </html>
