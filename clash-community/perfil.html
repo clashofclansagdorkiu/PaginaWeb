@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | Comunidad BdL</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/Logo_BdL.png">
+
+    <!-- CSS general -->
+    <link rel="stylesheet" href="perfil.css">
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ====== HEADER SUPERIOR ====== -->
+    <header style="
+        width: 100%;
+        padding: 15px 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        border-bottom: 1px solid #e5e5e5;
+    ">
+        <img src="images/Logo_BdL.png" alt="Logo" style="height: 40px;">
+        <h2 style="margin: 0; font-family: Inter, sans-serif; color: #222;">Perfil</h2>
+    </header>
+
+
+    <!-- ====== CONTENIDO PERFIL ====== -->
+    <div class="profile-container">
+
+        <!-- CABECERA PERFIL -->
+        <div class="profile-header">
+            <img src="images/Logo_BdL.png" alt="Foto perfil">
+            <h1 id="usernameDisplay">Jugador</h1>
+        </div>
+
+        <!-- INFORMACIÓN -->
+        <div class="profile-card profile-info">
+            <p><b>Nombre:</b> <span id="usernameDisplayInfo">Jugador</span></p>
+            <p><b>Email:</b> <span id="emailDisplay">example@mail.com</span></p>
+        </div>
+
+        <!-- FORMULARIO EDICIÓN -->
+        <div class="profile-card profile-edit">
+            <h2 style="margin-bottom: 10px;">Editar perfil</h2>
+
+            <label>Nombre</label>
+            <input type="text" id="usernameInput" placeholder="Tu nombre">
+
+            <label style="margin-top: 15px;">Email</label>
+            <input type="email" id="emailInput" placeholder="Tu email">
+
+            <button id="saveProfile">Guardar cambios</button>
+        </div>
+    </div>
+
+
+    <!-- JS -->
+    <script src="perfil.js"></script>
+
+</body>
+</html>
