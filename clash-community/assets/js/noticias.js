@@ -1,12 +1,8 @@
-// ----------------------------------------------------
-// ARCHIVO: assets/js/noticias.js
-// ----------------------------------------------------
-
-// 🔥 Configura tu información de Supabase (las mismas que usas en clanes.js)
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
-const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcQQsO4oLxY";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
 
-// Inicializar el cliente Supabase (usando 'client' para evitar conflictos)
+// SOLUCIÓN: Usamos un nombre distinto para la instancia (ej: 'client')
+// para no tapar la variable global 'supabase' que viene del CDN.
 const client = supabase.createClient(SUPA_URL, SUPA_KEY);
 
 /**
