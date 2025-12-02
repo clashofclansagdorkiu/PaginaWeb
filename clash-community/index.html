@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEZO</title>
+    <title>LEZO Dashboard</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./images/Logo_BdL.png">
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,7 +19,7 @@
                             gold: '#FFD700',
                             dark: '#1a1a1a',
                             light: '#2a2a2a',
-                            redsoft: '#8B0000' /* rojo suave para acentos */
+                            redsoft: '#8B0000'
                         }
                     },
                     fontFamily: {
@@ -29,54 +30,72 @@
         }
     </script>
 
-    <!-- Enlace a CSS externo -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./assets/css/index.css">
 </head>
+<body class="bg-gray-900 text-white min-h-screen bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
 
-<body class="bg-gray-900 text-white h-screen flex items-center justify-center bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
+    <!-- Menú principal -->
+    <nav class="bg-gray-800/70 border-b border-gray-700 backdrop-blur-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                
+                <!-- Logo + LEZO como enlace -->
+                <a href="./index.html" class="flex-shrink-0 flex items-center mr-12">
+                    <img class="h-12 w-12 rounded-full border-2 border-white shadow-lg" src="./images/Logo_BdL.png" alt="Logo">
+                    <span class="ml-3 text-white font-hispanic text-2xl drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">LEZO</span>
+                </a>
 
-    <div class="ornamento bg-gray-800/70 p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-700 backdrop-blur-sm">
-        
-        <!-- Logo en la parte superior -->
-        <div class="text-center mb-6">
-            <img src="./images/Logo_BdL.png" alt="Logo" class="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-white shadow-lg">
-        </div>
+                <!-- Menú principal -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="menu-link">Noticias</a>
+                    <a href="#" class="menu-link">Chat</a>
+                    <a href="#" class="menu-link">Buzón</a>
+                    <a href="#" class="menu-link">Clanes</a>
+                    <a href="#" class="menu-link">Eventos</a>
+                    <a href="#" class="menu-link">Sugerencias</a>
+                    <a href="#" class="menu-link">Donaciones</a>
+                </div>
 
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-hispanic font-bold text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">
-                LEZO
-            </h1>
-            <p class="text-gray-300 text-sm italic">
-                Comunidad BdL
-            </p>
-        </div>
+                <!-- Botón menú móvil -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none text-2xl">&#9776;</button>
+                </div>
 
-        <form id="loginForm" class="space-y-6">
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-300">Usuario</label>
-                <input type="text" id="username" required 
-                    class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-md text-white focus:outline-none focus:border-clash-redsoft focus:ring-1 focus:ring-clash-redsoft">
             </div>
-
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
-                <input type="password" id="password" required 
-                    class="mt-1 block w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-md text-white focus:outline-none focus:border-clash-redsoft focus:ring-1 focus:ring-clash-redsoft">
-            </div>
-
-            <div id="errorMessage" class="text-red-400 text-sm text-center hidden"></div>
-
-            <button type="submit" 
-                class="w-full py-2 px-4 border border-clash-redsoft rounded-md shadow-md text-sm font-medium text-white bg-clash-redsoft hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-bold transition-all tracking-wide">
-                ACCESO
-            </button>
-        </form>
-
-        <div class="mt-6 text-center text-xs text-gray-400">
-            <p>Si no tienes cuenta, deberá de solicitar una al administrador.</p>
         </div>
-    </div>
 
-    <script type="module" src="./assets/js/auth.js"></script>
+        <!-- Menú móvil -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+            <a href="#" class="menu-link block">Noticias</a>
+            <a href="#" class="menu-link block">Chat</a>
+            <a href="#" class="menu-link block">Buzón</a>
+            <a href="#" class="menu-link block">Clanes</a>
+            <a href="#" class="menu-link block">Eventos</a>
+            <a href="#" class="menu-link block">Sugerencias</a>
+            <a href="#" class="menu-link block">Donaciones</a>
+        </div>
+    </nav>
+
+    <!-- Contenido del dashboard -->
+    <main class="pt-28 max-w-7xl mx-auto p-4 flex flex-col items-center">
+        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)] text-center">
+            Bienvenido a la Comunidad Blas de Lezo
+        </h1>
+        <p class="text-gray-300 text-center mb-12">
+            Explora nuestras noticias, eventos y foros. ¡Participa y diviértete con la comunidad!
+        </p>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-gray-800/70 border-t border-gray-700 backdrop-blur-sm mt-auto w-full py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center text-gray-300 space-x-4">
+            <img src="./images/Nomad_Byte_Studios.png" alt="Nomad Byte Studios" class="h-8 w-auto">
+            <span>&copy; 2025 Nomad Byte Studios. Todos los derechos reservados.</span>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="./assets/js/index.js"></script>
 </body>
 </html>
