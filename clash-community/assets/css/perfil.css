@@ -1,0 +1,88 @@
+/* Inputs y textarea */
+.perfil-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(40,40,40,0.7);
+    border: 1px solid #555;
+    color: white;
+    outline: none;
+}
+.perfil-input:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 2px rgba(139,0,0,0.3);
+}
+
+/* Botón */
+.perfil-btn {
+    padding: 12px;
+    font-weight: bold;
+    background-color: #8B0000;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.perfil-btn:hover {
+    background-color: #a10000;
+}
+
+/* Slot añadir cuenta */
+.perfil-slot-add {
+    background-color: rgba(40,40,40,0.6);
+    border: 2px dashed #888;
+    border-radius: 12px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.perfil-slot-add:hover {
+    background-color: rgba(50,50,50,0.7);
+}
+/* Inputs y textarea */
+.perfil-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(40,40,40,0.7);
+    border: 1px solid #555;
+    color: white;
+    outline: none;
+}
+.perfil-input:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 2px rgba(139,0,0,0.3);
+}
+
+/* Botón */
+.perfil-btn {
+    padding: 12px;
+    font-weight: bold;
+    background-color: #8B0000;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.perfil-btn:hover {
+    background-color: #a10000;
+}
+
+/* Slot añadir cuenta */
+.perfil-slot-add {
+    background-color: rgba(40,40,40,0.6);
+    border: 2px dashed #888;
+    border-radius: 12px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.perfil-slot-add:hover {
+    background-color: rgba(50,50,50,0.7);
+}

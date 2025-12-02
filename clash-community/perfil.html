@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | Comunidad BdL</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./images/Logo_BdL.png">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clash: {
+                            gold: '#FFD700',
+                            dark: '#1a1a1a',
+                            light: '#2a2a2a',
+                            redsoft: '#8B0000'
+                        }
+                    },
+                    fontFamily: {
+                        hispanic: ['"Cinzel Decorative"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/menu.css">
+    <link rel="stylesheet" href="./assets/css/perfil.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
+
+    <!-- Menú superior (igual que dashboard) -->
+    <nav class="bg-gray-800/70 border-b border-gray-700 backdrop-blur-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="./dashboard.html" class="flex-shrink-0 flex items-center mr-12">
+                    <img class="h-12 w-12 rounded-full border-2 border-white shadow-lg" src="./images/Logo_BdL.png" alt="Logo">
+                    <span class="ml-3 text-white font-hispanic text-2xl drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">LEZO</span>
+                </a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="menu-link">Noticias</a>
+                    <a href="#" class="menu-link">Chat</a>
+                    <a href="#" class="menu-link">Buzón</a>
+                    <a href="#" class="menu-link">Clanes</a>
+                    <a href="#" class="menu-link">Eventos</a>
+                    <a href="#" class="menu-link">Sugerencias</a>
+                    <a href="#" class="menu-link">Donaciones</a>
+                    <a href="perfil.html" class="menu-link active">Perfil</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none text-2xl">&#9776;</button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+            <a href="#" class="menu-link block">Noticias</a>
+            <a href="#" class="menu-link block">Chat</a>
+            <a href="#" class="menu-link block">Buzón</a>
+            <a href="#" class="menu-link block">Clanes</a>
+            <a href="#" class="menu-link block">Eventos</a>
+            <a href="#" class="menu-link block">Sugerencias</a>
+            <a href="#" class="menu-link block">Donaciones</a>
+            <a href="perfil.html" class="menu-link block active">Perfil</a>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <main class="pt-28 max-w-5xl mx-auto p-4">
+
+        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white text-center drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">
+            Mi Perfil
+        </h1>
+
+        <!-- Datos del perfil -->
+        <section class="bg-black/60 border border-gray-700 rounded-xl p-6 backdrop-blur-sm mb-10">
+            <label class="block text-lg font-semibold mb-2">Nombre</label>
+            <input id="perfilNombre" class="perfil-input" type="text" placeholder="Introduce tu nombre">
+
+            <label class="block text-lg font-semibold mt-6 mb-2">Descripción</label>
+            <textarea id="perfilDescripcion" class="perfil-input h-32 resize-none" placeholder="Escribe algo sobre ti..."></textarea>
+
+            <button id="guardarPerfil" class="perfil-btn mt-6 w-full">
+                Guardar cambios
+            </button>
+        </section>
+
+        <!-- Cuentas vinculadas -->
+        <h2 class="text-3xl font-hispanic mb-4 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">
+            Cuentas de Clash vinculadas
+        </h2>
+        <section id="cuentasContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Los slots se generarán dinámicamente desde JS -->
+        </section>
+    </main>
+
+    <script src="./assets/js/menu.js"></script>
+    <script src="./assets/js/perfil.js" type="module"></script>
+</body>
+</html>
