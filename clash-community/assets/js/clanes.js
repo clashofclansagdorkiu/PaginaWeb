@@ -1,6 +1,6 @@
 // 🔥 Configura tu información de Supabase
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
-const SUPA_KEY = "sb_publishable_HprKhNP-0t1dX3A2yMoHsQ_aLYLR_8a";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
 
 const supabase = supabase.createClient(SUPA_URL, SUPA_KEY);
 
