@@ -4,7 +4,7 @@
 
 // 🔥 Configura tu información de Supabase (las mismas que usas en clanes.js)
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
-const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcQQsO4oLxY";
 
 // Inicializar el cliente Supabase (usando 'client' para evitar conflictos)
 const client = supabase.createClient(SUPA_URL, SUPA_KEY);
@@ -68,7 +68,7 @@ async function cargarNoticias() {
                     <img src="${noticia.imagen_url}" 
                          alt="${noticia.titulo}" 
                          class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-600 aspect-[16/9]"
-                         onerror="this.onerror=null;this.src='./images/Logo_BdL.png';">
+                         onerror="this.src='./images/Logo_BdL.png'; this.classList.remove('object-cover', 'aspect-[16/9]'); this.classList.add('p-8', 'bg-gray-900', 'object-contain')">
                 </div>
                 <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-2/3 flex flex-col justify-between">
