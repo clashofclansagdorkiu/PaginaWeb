@@ -68,7 +68,7 @@ async function cargarNoticias() {
                     <img src="${noticia.imagen_url}" 
                          alt="${noticia.titulo}" 
                          class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-600 aspect-[16/9]"
-                         onerror="this.src='./images/Logo_BdL.png'; this.classList.add('p-8', 'bg-gray-900')">
+                         onerror="this.onerror=null;this.src='./images/Logo_BdL.png';">
                 </div>
                 <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-2/3 flex flex-col justify-between">
