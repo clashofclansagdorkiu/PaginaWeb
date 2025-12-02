@@ -42,40 +42,42 @@ async function cargarNoticias() {
     // 2. Renderizado de cada noticia
     noticias.forEach(noticia => {
         const fechaFormateada = formatarFecha(noticia.fecha_publicacion);
-        
-        // Determinar la estructura y el orden en base a si hay imagen
         const hasImage = !!noticia.imagen_url;
+        const esDestacada = noticia.noticia_destacada === true;
 
-        // Clase base de la tarjeta
+        let destacadoHTML = '';
+        if (esDestacada) {
+            destacadoHTML = `
+                <div class="mb-3 px-3 py-1 rounded-lg bg-red-700 text-white font-bold inline-block shadow">
+                    &#9733; Noticia destacada
+                </div>
+            `;
+        }
+
         let cardClasses = `
             bg-gray-800/80 border border-gray-700 shadow-2xl rounded-xl p-6 
             flex flex-col md:flex-row gap-6 transition-all duration-300
         `;
-        
-        // Estructura adaptativa para el contenido
         let contentHTML = '';
 
         if (hasImage) {
-            // Diseño para noticias CON IMAGEN: 30% Imagen, 70% Contenido
-            cardClasses += ' items-start'; // Alinear elementos arriba
+            cardClasses += ' items-start';
             contentHTML = `
-                <!-- Bloque de Imagen (30% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-1/3 flex-shrink-0">
                     <img src="${noticia.imagen_url}" 
                          alt="${noticia.titulo}" 
                          class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-600 aspect-[16/9]"
                          onerror="this.src='./images/Logo_BdL.png'; this.classList.remove('object-cover', 'aspect-[16/9]'); this.classList.add('p-8', 'bg-gray-900', 'object-contain')">
                 </div>
-                <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-2/3 flex flex-col justify-between">
                     <div>
+                        ${destacadoHTML}
                         <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                         <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                            Publicado el ${fechaFormateada}
                         </p>
                         <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
                     </div>
-                    <!-- Botón de Acción Condicional -->
                     ${noticia.boton_texto && noticia.boton_enlace ? `
                         <a href="${noticia.boton_enlace}" target="_blank" class="mt-4 inline-block bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 text-center">
                             ${noticia.boton_texto}
@@ -84,17 +86,14 @@ async function cargarNoticias() {
                 </div>
             `;
         } else {
-            // Diseño para noticias SIN IMAGEN: 100% Contenido
-            cardClasses += ' flex-col'; // Vuelve a ser una columna simple
+            cardClasses += ' flex-col';
             contentHTML = `
-                <!-- Bloque de Texto y Botón (100%) -->
+                ${destacadoHTML}
                 <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                 <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                    Publicado el ${fechaFormateada}
                 </p>
                 <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
-                
-                <!-- Botón de Acción Condicional -->
                 ${noticia.boton_texto && noticia.boton_enlace ? `
                     <div class="mt-4">
                         <a href="${noticia.boton_enlace}" target="_blank" class="inline-block bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 text-center">
