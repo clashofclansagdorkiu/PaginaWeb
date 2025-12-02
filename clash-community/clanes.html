@@ -88,15 +88,14 @@
             <span>&copy; 2025 Nomad Byte Studios. Todos los derechos reservados.</span>
         </div>
     </footer>
-
-<!-- MENÚ / LOGO / FOOTER -->
 <script src="./assets/js/index.js"></script>
 
-<!-- 🟦 Librería oficial de Supabase (DEBE ir antes de clanes.js) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- 🟦 Librería Supabase UMD (modo global, la que SÍ funciona en navegador sin bundler) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
 
-<!-- 🟩 Tu script que usa Supabase -->
+<!-- 🟩 Script que usa la librería -->
 <script src="./assets/js/clanes.js"></script>
+
 
 </body>
 </html>
