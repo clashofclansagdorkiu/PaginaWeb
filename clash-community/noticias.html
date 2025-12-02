@@ -49,22 +49,27 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="./index.html" class="menu-link">Inicio</a>
-                        <a href="./noticias.html" class="menu-link text-yellow-400">Noticias</a> <!-- Enlace activo -->
-                        <a href="#" class="menu-link">Chat</a>
-                        <a href="#" class="menu-link">Buzón</a>
+                        <a href="./noticias.html" class="menu-link text-yellow-400">Noticias</a>
                         <a href="./clanes.html" class="menu-link">Clanes</a>
                         <a href="#" class="menu-link">Eventos</a>
                         <a href="#" class="menu-link">Sugerencias</a>
                         <a href="#" class="menu-link">Donaciones</a>
                     </div>
                 </div>
-                <!-- Botón de menú móvil (oculto por simplicidad, pero parte del layout) -->
-                <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
+                <!-- Botón de menú móvil -->
+                <div class="md:hidden flex items-center flex-shrink-0">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none text-2xl">&#9776;</button>
+                </div>
             </div>
+        </div>
+        <!-- Menú móvil -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+            <a href="./index.html" class="menu-link block">Inicio</a>
+            <a href="./noticias.html" class="menu-link block text-yellow-400">Noticias</a>
+            <a href="./clanes.html" class="menu-link block">Clanes</a>
+            <a href="#" class="menu-link block">Eventos</a>
+            <a href="#" class="menu-link block">Sugerencias</a>
+            <a href="#" class="menu-link block">Donaciones</a>
         </div>
     </nav>
 
@@ -95,6 +100,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
     <!-- Script de carga de Noticias -->
     <script src="./assets/js/noticias.js"></script>
+    <script>
+        // Menú móvil funcionalidad
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 </html>
