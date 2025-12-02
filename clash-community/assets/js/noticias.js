@@ -1,8 +1,12 @@
+// ----------------------------------------------------
+// ARCHIVO: assets/js/noticias.js
+// ----------------------------------------------------
+
+// 🔥 Configura tu información de Supabase (las mismas que usas en clanes.js)
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
 const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
 
-// SOLUCIÓN: Usamos un nombre distinto para la instancia (ej: 'client')
-// para no tapar la variable global 'supabase' que viene del CDN.
+// Inicializar el cliente Supabase (usando 'client' para evitar conflictos)
 const client = supabase.createClient(SUPA_URL, SUPA_KEY);
 
 /**
@@ -42,42 +46,64 @@ async function cargarNoticias() {
     // 2. Renderizado de cada noticia
     noticias.forEach(noticia => {
         const fechaFormateada = formatarFecha(noticia.fecha_publicacion);
-        const hasImage = !!noticia.imagen_url;
-        const esDestacada = noticia.noticia_destacada === true;
+        
+        // Determinar si es una noticia destacada
+        const esDestacada = noticia.destacada === true;
 
-        let destacadoHTML = '';
-        if (esDestacada) {
-            destacadoHTML = `
-                <div class="mb-3 px-3 py-1 rounded-lg bg-red-700 text-white font-bold inline-block shadow">
-                    &#9733; Noticia destacada
-                </div>
-            `;
-        }
+        // --- Lógica de Clases y Estilos Condicionales ---
 
+        // 1. Clase base de la tarjeta
         let cardClasses = `
-            bg-gray-800/80 border border-gray-700 shadow-2xl rounded-xl p-6 
+            bg-gray-800/80 border shadow-2xl rounded-xl p-6 
             flex flex-col md:flex-row gap-6 transition-all duration-300
         `;
+        
+        // 2. Aplicar estilo de destacado si corresponde
+        if (esDestacada) {
+            // Si es destacada, cambia el borde y aplica un hover especial
+            cardClasses += ' border-red-600 hover:shadow-red-900/50 hover:scale-[1.01]';
+        } else {
+            // Si no es destacada, usa el borde por defecto de la tarjeta
+            cardClasses += ' border-gray-700';
+        }
+
+        // 3. Etiqueta HTML para Noticia Destacada
+        const destacadoHTML = esDestacada ? `
+            <span class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow-lg">
+                Noticia Destacada
+            </span>
+        ` : '';
+
+        // Determinar la estructura y el orden en base a si hay imagen
+        const hasImage = !!noticia.imagen_url;
+
+        // Estructura adaptativa para el contenido
         let contentHTML = '';
 
         if (hasImage) {
-            cardClasses += ' items-start';
+            // Diseño para noticias CON IMAGEN: 30% Imagen, 70% Contenido
+            cardClasses += ' items-start'; // Alinear elementos arriba
             contentHTML = `
+                <!-- Bloque de Imagen (30% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-1/3 flex-shrink-0">
+                    <!-- Se inyecta el tag Destacado aquí para que esté sobre el texto principal -->
+                    ${destacadoHTML} 
                     <img src="${noticia.imagen_url}" 
                          alt="${noticia.titulo}" 
                          class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-600 aspect-[16/9]"
                          onerror="this.src='./images/Logo_BdL.png'; this.classList.remove('object-cover', 'aspect-[16/9]'); this.classList.add('p-8', 'bg-gray-900', 'object-contain')">
                 </div>
+                <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-2/3 flex flex-col justify-between">
                     <div>
-                        ${destacadoHTML}
+                        <!-- Si hay imagen, el tag Destacado ya se inyectó fuera de este div -->
                         <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                         <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                            Publicado el ${fechaFormateada}
                         </p>
                         <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
                     </div>
+                    <!-- Botón de Acción Condicional -->
                     ${noticia.boton_texto && noticia.boton_enlace ? `
                         <a href="${noticia.boton_enlace}" target="_blank" class="mt-4 inline-block bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 text-center">
                             ${noticia.boton_texto}
@@ -86,14 +112,18 @@ async function cargarNoticias() {
                 </div>
             `;
         } else {
-            cardClasses += ' flex-col';
+            // Diseño para noticias SIN IMAGEN: 100% Contenido
+            cardClasses += ' flex-col'; // Vuelve a ser una columna simple
             contentHTML = `
+                <!-- Bloque de Texto y Botón (100%) -->
                 ${destacadoHTML}
                 <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                 <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                    Publicado el ${fechaFormateada}
                 </p>
                 <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
+                
+                <!-- Botón de Acción Condicional -->
                 ${noticia.boton_texto && noticia.boton_enlace ? `
                     <div class="mt-4">
                         <a href="${noticia.boton_enlace}" target="_blank" class="inline-block bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 text-center">
