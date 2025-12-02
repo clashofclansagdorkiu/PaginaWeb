@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEZO Dashboard</title>
+    <title>Clanes • LEZO</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./images/Logo_BdL.png">
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -30,72 +31,64 @@
         }
     </script>
 
-    <!-- CSS externo -->
     <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 <body class="bg-gray-900 text-white min-h-screen bg-[url('https://wallpaperaccess.com/full/4607123.jpg')] bg-cover bg-center bg-no-repeat bg-blend-overlay bg-black/60">
 
-    <!-- Menú principal -->
+    <!-- Menú -->
     <nav class="bg-gray-800/70 border-b border-gray-700 backdrop-blur-sm fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                
-                <!-- Logo + LEZO como enlace -->
-                <a href="./index.html" class="flex-shrink-0 flex items-center mr-12">
+
+                <a href="./index.html" class="flex items-center">
                     <img class="h-12 w-12 rounded-full border-2 border-white shadow-lg" src="./images/Logo_BdL.png" alt="Logo">
-                    <span class="ml-3 text-white font-hispanic text-2xl drop-shadow-[0_0_6px_rgba(139,0,0,0.7)]">LEZO</span>
+                    <span class="ml-3 font-hispanic text-2xl text-white">LEZO</span>
                 </a>
 
-                <!-- Menú principal -->
                 <div class="hidden md:flex space-x-6">
                     <a href="#" class="menu-link">Noticias</a>
                     <a href="#" class="menu-link">Chat</a>
                     <a href="#" class="menu-link">Buzón</a>
-                    <a href="clanes.html" class="menu-link">Clanes</a>
+                    <a href="./clanes.html" class="menu-link text-yellow-400">Clanes</a>
                     <a href="#" class="menu-link">Eventos</a>
                     <a href="#" class="menu-link">Sugerencias</a>
                     <a href="#" class="menu-link">Donaciones</a>
                 </div>
 
-                <!-- Botón menú móvil -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobileMenuBtn" class="text-white focus:outline-none text-2xl">&#9776;</button>
-                </div>
-
+                <button id="mobileMenuBtn" class="md:hidden text-2xl text-white">&#9776;</button>
             </div>
         </div>
 
-        <!-- Menú móvil -->
         <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
             <a href="#" class="menu-link block">Noticias</a>
             <a href="#" class="menu-link block">Chat</a>
             <a href="#" class="menu-link block">Buzón</a>
-            <a href="clanes.html" class="menu-link block">Clanes</a>
+            <a href="./clanes.html" class="menu-link block text-yellow-400">Clanes</a>
             <a href="#" class="menu-link block">Eventos</a>
             <a href="#" class="menu-link block">Sugerencias</a>
             <a href="#" class="menu-link block">Donaciones</a>
         </div>
     </nav>
 
-    <!-- Contenido del dashboard -->
-    <main class="pt-28 max-w-7xl mx-auto p-4 flex flex-col items-center">
-        <h1 class="text-4xl font-hispanic font-bold mb-6 text-white drop-shadow-[0_0_6px_rgba(139,0,0,0.7)] text-center">
-            Bienvenido a la Comunidad Blas de Lezo
+    <!-- Contenido -->
+    <main class="pt-28 max-w-6xl mx-auto p-4">
+
+        <h1 class="text-4xl font-hispanic font-bold text-center mb-10 text-yellow-400 drop-shadow-lg">
+            Clanes de la Comunidad
         </h1>
-        <p class="text-gray-300 text-center mb-12">
-            Explora nuestras noticias, eventos y foros. ¡Participa y diviértete con la comunidad!
-        </p>
+
+        <div id="clanContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
     </main>
 
-    <!-- Pie de página -->
-    <footer class="bg-gray-800/70 border-t border-gray-700 backdrop-blur-sm mt-auto w-full py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center text-gray-300 space-x-4">
-            <img src="./images/Nomad_Byte_Studios.png" alt="Nomad Byte Studios" class="h-8 w-auto">
-            <span>&copy; 2025 Nomad Byte Studios. Todos los derechos reservados.</span>
+    <footer class="bg-gray-800/70 border-t border-gray-700 backdrop-blur-sm py-4 mt-16">
+        <div class="max-w-7xl mx-auto text-center text-gray-300">
+            <img src="./images/Nomad_Byte_Studios.png" class="h-8 mx-auto mb-2" />
+            © 2025 Nomad Byte Studios — Todos los derechos reservados
         </div>
     </footer>
 
-    <!-- JS -->
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/clanes.js"></script>
 </body>
 </html>
