@@ -36,9 +36,25 @@ async function cargarClanes() {
 
         // Validación extra por si el tag viene sin # o es nulo
         const tagLimpio = clan.tag ? clan.tag.replace('#','') : ''; 
-        const imagenClan = `https://api-assets.clashofclans.com/badges/200/${tagLimpio}.png`;
+// ... dentro del forEach ...
+
+        // SOLUCIÓN: Usamos la URL que guardaste en la base de datos.
+        // Si el campo está vacío, usa el logo por defecto.
+        const imagenClan = clan.logo_url || './images/Logo_BdL.png';
 
         card.innerHTML = `
+            <div class="flex flex-col items-center">
+                <img src="${imagenClan}" 
+                    class="w-24 h-24 mb-3 rounded-lg shadow-md border border-gray-600 bg-black/50 object-contain"
+                    alt="Escudo de ${clan.nombre}"
+                    onerror="this.src='./images/Logo_BdL.png'">
+
+                <h2 class="text-2xl font-hispanic text-yellow-400 text-center drop-shadow-md">
+                    ${clan.nombre || 'Sin nombre'}
+                </h2>
+                `;
+                card.innerHTML = `
+                
             <div class="flex flex-col items-center">
                 <img src="${imagenClan}" 
                      class="w-24 h-24 mb-3 rounded-lg shadow-md border border-gray-600 bg-black/50"
