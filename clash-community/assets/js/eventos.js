@@ -5,15 +5,18 @@
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
 const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// CORRECCIÓN: Usamos window.supabase para acceder a la librería global
+// y asignamos el cliente a una variable distinta para evitar conflictos.
+const supabaseClient = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
 // =========================================================
 //     LEER EVENTOS DESDE SUPABASE
 // =========================================================
 async function obtenerEventos() {
 
-    const { data, error } = await supabase
-        .from("Eventos")
+    // CORRECCIÓN: Asegúrate de que el nombre de la tabla sea exacto ("Eventos" vs "eventos")
+    const { data, error } = await supabaseClient
+        .from("Eventos") 
         .select("*")
         .order("inicio", { ascending: true });
 
@@ -30,6 +33,7 @@ async function obtenerEventos() {
 //     CLASIFICAR EVENTOS (CORREGIDO)
 // =========================================================
 function clasificar(eventos) {
+    if (!eventos) return { proximos: [], activos: [], pasados: [] };
 
     const ahora = new Date();
 
@@ -38,7 +42,7 @@ function clasificar(eventos) {
     let pasados = [];
 
     eventos.forEach(e => {
-
+        // Asegurar que las fechas se interpretan correctamente
         const inicio = new Date(e.inicio);
         const fin = new Date(e.fin);
 
@@ -72,23 +76,24 @@ function tarjeta(e, tipo) {
                   tipo === "activo"  ? "border-green-400" :
                                        "border-red-400";
 
-    const inicio = e.inicio.replace("T", " • ").split("+")[0];
-    const fin = e.fin.replace("T", " • ").split("+")[0];
+    // Manejo seguro de strings de fecha
+    const inicioStr = e.inicio ? e.inicio.replace("T", " • ").split("+")[0] : "Fecha pendiente";
+    const finStr = e.fin ? e.fin.replace("T", " • ").split("+")[0] : "Fecha pendiente";
 
     return `
-    <div class="event-card border ${borde}">
+    <div class="event-card border ${borde} bg-gray-800 p-4 rounded-lg shadow-lg">
 
         ${e.imagen ? `<img src="${e.imagen}" class="w-full h-40 object-cover rounded-lg mb-3">` : ""}
 
-        <h3 class="text-2xl font-hispanic mb-2">${e.titulo}</h3>
+        <h3 class="text-2xl font-hispanic mb-2 text-white">${e.titulo}</h3>
 
         <p class="text-gray-300 mb-3">${e.descripcion}</p>
 
-        <p class="text-gray-400 text-sm mb-1">Inicio: <span class="text-white">${inicio}</span></p>
-        <p class="text-gray-400 text-sm mb-3">Fin: <span class="text-white">${fin}</span></p>
+        <p class="text-gray-400 text-sm mb-1">Inicio: <span class="text-white">${inicioStr}</span></p>
+        <p class="text-gray-400 text-sm mb-3">Fin: <span class="text-white">${finStr}</span></p>
 
         ${e.boton_texto ? `
-        <a href="${e.boton_url}" class="inline-block mt-2 bg-yellow-400 text-black py-1 px-3 rounded-md font-bold hover:bg-yellow-300 transition">
+        <a href="${e.boton_url}" target="_blank" class="inline-block mt-2 bg-yellow-400 text-black py-1 px-3 rounded-md font-bold hover:bg-yellow-300 transition">
             ${e.boton_texto}
         </a>` : ""}
     </div>`;
@@ -102,14 +107,18 @@ async function render() {
     const eventos = await obtenerEventos();
     const { proximos, activos, pasados } = clasificar(eventos);
 
-    document.getElementById("proximosEventos").innerHTML =
-        proximos.map(e => tarjeta(e, "proximo")).join("");
+    const containerProximos = document.getElementById("proximosEventos");
+    const containerActivos = document.getElementById("eventosActivos");
+    const containerPasados = document.getElementById("eventosPasados");
 
-    document.getElementById("eventosActivos").innerHTML =
-        activos.map(e => tarjeta(e, "activo")).join("");
-
-    document.getElementById("eventosPasados").innerHTML =
-        pasados.map(e => tarjeta(e, "pasado")).join("");
+    if(containerProximos) containerProximos.innerHTML = proximos.map(e => tarjeta(e, "proximo")).join("");
+    if(containerActivos) containerActivos.innerHTML = activos.map(e => tarjeta(e, "activo")).join("");
+    if(containerPasados) containerPasados.innerHTML = pasados.map(e => tarjeta(e, "pasado")).join("");
+    
+    // Si no hay eventos en absoluto
+    if (proximos.length === 0 && activos.length === 0 && pasados.length === 0) {
+        console.log("No hay eventos para mostrar en ninguna categoría.");
+    }
 }
 
 document.addEventListener("DOMContentLoaded", render);
