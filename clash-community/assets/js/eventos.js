@@ -5,13 +5,12 @@
 const SUPA_URL = "https://lhuswstsypbgpnhuqpxn.supabase.co";
 const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxodXN3c3RzeXBiZ3BuaHVxcHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2Njc2MDksImV4cCI6MjA4MDI0MzYwOX0.ABksaYWqY9QCOm3gRvl3cKE3eh-daQA5BcWQsO4oLxY";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // =========================================================
-//     OBTENER EVENTOS DESDE LA BASE DE DATOS SUPABASE
+//     LEER EVENTOS DESDE SUPABASE
 // =========================================================
-
-async function obtenerEventosDesdeBD() {
+async function obtenerEventos() {
 
     const { data, error } = await supabase
         .from("Eventos")
@@ -19,19 +18,18 @@ async function obtenerEventosDesdeBD() {
         .order("inicio", { ascending: true });
 
     if (error) {
-        console.error("Error cargando Eventos:", error);
+        console.error("❌ Error obteniendo eventos:", error);
         return [];
     }
 
-    console.log("Eventos cargados:", data);
+    console.log("📥 Eventos cargados:", data);
     return data;
 }
 
 // =========================================================
-//            CLASIFICAR EVENTOS
+//     CLASIFICAR EVENTOS (CORREGIDO)
 // =========================================================
-
-function clasificarEventos(eventos) {
+function clasificar(eventos) {
 
     const ahora = new Date();
 
@@ -41,11 +39,11 @@ function clasificarEventos(eventos) {
 
     eventos.forEach(e => {
 
-        const inicio = new Date(Date.parse(e.inicio));
-        const fin    = new Date(Date.parse(e.fin));
+        const inicio = new Date(e.inicio);
+        const fin = new Date(e.fin);
 
         if (isNaN(inicio) || isNaN(fin)) {
-            console.warn("Fecha inválida en el evento:", e);
+            console.warn("⚠ Evento con fecha inválida:", e);
             return;
         }
 
@@ -54,80 +52,64 @@ function clasificarEventos(eventos) {
         else pasados.push(e);
     });
 
-    // Ordenar
-    proximos.sort((a, b) => new Date(a.inicio) - new Date(b.inicio));
-    activos.sort((a, b) => new Date(a.inicio) - new Date(b.inicio));
-    pasados.sort((a, b) => new Date(b.fin) - new Date(a.fin));
+    proximos.sort((a,b) => new Date(a.inicio) - new Date(b.inicio));
+    activos.sort((a,b) => new Date(a.inicio) - new Date(b.inicio));
+    pasados.sort((a,b) => new Date(b.fin) - new Date(a.fin));
 
     return {
-        proximos: proximos.slice(0, 2),
-        activos: activos.slice(0, 4),
-        pasados: pasados.slice(0, 2)
+        proximos: proximos.slice(0,2),
+        activos: activos.slice(0,4),
+        pasados: pasados.slice(0,2)
     };
 }
 
 // =========================================================
-//                CREAR TARJETA HTML
+//     CREAR TARJETA HTML
 // =========================================================
+function tarjeta(e, tipo) {
 
-function crearTarjeta(evento, tipo) {
+    const borde = tipo === "proximo" ? "border-yellow-400" :
+                  tipo === "activo"  ? "border-green-400" :
+                                       "border-red-400";
 
-    let borde =
-        tipo === "proximo" ? "border-yellow-400" :
-        tipo === "activo"  ? "border-green-400" :
-                             "border-red-400";
-
-    const formatoInicio = evento.inicio.replace("T", " • ").split("+")[0];
-    const formatoFin = evento.fin.replace("T", " • ").split("+")[0];
+    const inicio = e.inicio.replace("T", " • ").split("+")[0];
+    const fin = e.fin.replace("T", " • ").split("+")[0];
 
     return `
     <div class="event-card border ${borde}">
 
-        ${evento.imagen ? `
-        <img src="${evento.imagen}" class="w-full h-40 object-cover rounded-lg mb-3">
-        ` : ""}
+        ${e.imagen ? `<img src="${e.imagen}" class="w-full h-40 object-cover rounded-lg mb-3">` : ""}
 
-        <h3 class="text-2xl font-hispanic mb-2">${evento.titulo}</h3>
+        <h3 class="text-2xl font-hispanic mb-2">${e.titulo}</h3>
 
-        <p class="text-gray-300 mb-3">${evento.descripcion}</p>
+        <p class="text-gray-300 mb-3">${e.descripcion}</p>
 
-        <p class="text-gray-400 text-sm mb-1">
-            Inicio: <span class="text-white">${formatoInicio}</span>
-        </p>
+        <p class="text-gray-400 text-sm mb-1">Inicio: <span class="text-white">${inicio}</span></p>
+        <p class="text-gray-400 text-sm mb-3">Fin: <span class="text-white">${fin}</span></p>
 
-        <p class="text-gray-400 text-sm mb-3">
-            Fin: <span class="text-white">${formatoFin}</span>
-        </p>
-
-        ${evento.boton_texto ? `
-        <a href="${evento.boton_url}" class="inline-block mt-2 bg-yellow-400 text-black py-1 px-3 rounded-md font-bold hover:bg-yellow-300 transition">
-            ${evento.boton_texto}
-        </a>
-        ` : ""}
+        ${e.boton_texto ? `
+        <a href="${e.boton_url}" class="inline-block mt-2 bg-yellow-400 text-black py-1 px-3 rounded-md font-bold hover:bg-yellow-300 transition">
+            ${e.boton_texto}
+        </a>` : ""}
     </div>`;
 }
 
 // =========================================================
-//                   RENDERIZAR EVENTOS
+//     RENDERIZAR
 // =========================================================
+async function render() {
 
-async function renderEventos() {
-
-    const eventos = await obtenerEventosDesdeBD();
-    const { proximos, activos, pasados } = clasificarEventos(eventos);
+    const eventos = await obtenerEventos();
+    const { proximos, activos, pasados } = clasificar(eventos);
 
     document.getElementById("proximosEventos").innerHTML =
-        proximos.map(e => crearTarjeta(e, "proximo")).join("");
+        proximos.map(e => tarjeta(e, "proximo")).join("");
 
     document.getElementById("eventosActivos").innerHTML =
-        activos.map(e => crearTarjeta(e, "activo")).join("");
+        activos.map(e => tarjeta(e, "activo")).join("");
 
     document.getElementById("eventosPasados").innerHTML =
-        pasados.map(e => crearTarjeta(e, "pasado")).join("");
+        pasados.map(e => tarjeta(e, "pasado")).join("");
 }
 
-// =========================================================
-//                           INIT
-// =========================================================
-
-document.addEventListener("DOMContentLoaded", renderEventos);
+document.addEventListener("DOMContentLoaded", render);
