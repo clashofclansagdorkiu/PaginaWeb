@@ -6,6 +6,22 @@ const EMAIL_TEMPLATE_ID = "template_zf2ej9s";
 // Inicializar EmailJS
 emailjs.init(EMAIL_PUBLIC_KEY);
 
+// Lógica de anónimo
+const nombreInput = document.getElementById('nombre');
+const anonimCheckbox = document.getElementById('anonimo');
+
+anonimCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        nombreInput.value = 'Anónimo';
+        nombreInput.readOnly = true;
+        nombreInput.classList.add('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
+    } else {
+        nombreInput.value = '';
+        nombreInput.readOnly = false;
+        nombreInput.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
+    }
+});
+
 document.getElementById("sugerenciaForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -35,6 +51,9 @@ document.getElementById("sugerenciaForm").addEventListener("submit", async (e) =
         estado.className = "text-center text-green-400 font-bold";
 
         document.getElementById("sugerenciaForm").reset();
+        nombreInput.readOnly = false;
+        nombreInput.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
+        anonimCheckbox.checked = false;
 
     } catch (error) {
         console.error("Error al enviar:", error);

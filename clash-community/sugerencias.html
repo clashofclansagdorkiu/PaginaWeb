@@ -143,22 +143,6 @@
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Lógica de anónimo
-        const nombreInput = document.getElementById('nombre');
-        const anonimCheckbox = document.getElementById('anonimo');
-
-        anonimCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                nombreInput.value = 'Anónimo';
-                nombreInput.readOnly = true;
-                nombreInput.classList.add('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
-            } else {
-                nombreInput.value = '';
-                nombreInput.readOnly = false;
-                nombreInput.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
-            }
-        });
     </script>
 </body>
 </html>
