@@ -67,9 +67,9 @@ async function cargarNoticias() {
             cardClasses += ' border-gray-700';
         }
 
-        // 3. Etiqueta HTML para Noticia Destacada
+        // 3. Etiqueta HTML para Noticia Destacada (SIEMPRE AL INICIO)
         const destacadoHTML = esDestacada ? `
-            <span class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow-lg">
+            <span class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow-lg w-fit">
                 Noticia Destacada
             </span>
         ` : '';
@@ -84,10 +84,12 @@ async function cargarNoticias() {
             // Diseño para noticias CON IMAGEN: 30% Imagen, 70% Contenido
             cardClasses += ' items-start'; // Alinear elementos arriba
             contentHTML = `
+                <!-- Etiqueta Destacada (FUERA de los bloques) -->
+                <div class="w-full">
+                    ${destacadoHTML}
+                </div>
                 <!-- Bloque de Imagen (30% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-1/3 flex-shrink-0">
-                    <!-- Se inyecta el tag Destacado aquí para que esté sobre el texto principal -->
-                    ${destacadoHTML} 
                     <img src="${noticia.imagen_url}" 
                          alt="${noticia.titulo}" 
                          class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-600 aspect-[16/9]"
@@ -96,7 +98,6 @@ async function cargarNoticias() {
                 <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
                 <div class="w-full md:w-2/3 flex flex-col justify-between">
                     <div>
-                        <!-- Si hay imagen, el tag Destacado ya se inyectó fuera de este div -->
                         <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                         <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                            Publicado el ${fechaFormateada}
@@ -115,7 +116,7 @@ async function cargarNoticias() {
             // Diseño para noticias SIN IMAGEN: 100% Contenido
             cardClasses += ' flex-col'; // Vuelve a ser una columna simple
             contentHTML = `
-                <!-- Bloque de Texto y Botón (100%) -->
+                <!-- Etiqueta Destacada (AL INICIO) -->
                 ${destacadoHTML}
                 <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                 <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
