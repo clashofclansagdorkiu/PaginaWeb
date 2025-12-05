@@ -14,9 +14,12 @@ async function cargarClanes() {
         .select("*")
         .order("nivel", { ascending: false });
 
+    // Log para depuración
+    console.log("Resultado consulta clanes:", { clanes, error });
+
     if (error) {
         contenedor.innerHTML = `<p class="text-red-500 text-center">Error cargando clanes: ${error.message}</p>`;
-        console.error("Error Supabase Noticias:", error);
+        console.error("Error Supabase Clanes:", error);
         return;
     }
 
@@ -40,22 +43,12 @@ async function cargarClanes() {
         // Si el campo está vacío, usa el logo por defecto.
         const imagenClan = clan.logo_url || './images/Logo_BdL.png';
 
+        // SOLO UNA ASIGNACIÓN A innerHTML
         card.innerHTML = `
             <div class="flex flex-col items-center">
                 <img src="${imagenClan}" 
-                    class="w-24 h-24 mb-3 rounded-lg shadow-md border border-gray-600 bg-black/50 object-contain"
-                    alt="Escudo de ${clan.nombre}"
-                    onerror="this.src='./images/Logo_BdL.png'">
-
-                <h2 class="text-2xl font-hispanic text-yellow-400 text-center drop-shadow-md">
-                    ${clan.nombre || 'Sin nombre'}
-                </h2>
-                `;
-                card.innerHTML = `
-                
-            <div class="flex flex-col items-center">
-                <img src="${imagenClan}" 
-                     class="w-24 h-24 mb-3 rounded-lg shadow-md border border-gray-600 bg-black/50"
+                     class="w-24 h-24 mb-3 rounded-lg shadow-md border border-gray-600 bg-black/50 object-contain"
+                     alt="Escudo de ${clan.nombre}"
                      onerror="this.src='./images/Logo_BdL.png'">
 
                 <h2 class="text-2xl font-hispanic text-yellow-400 text-center drop-shadow-md">${clan.nombre || 'Sin Nombre'}</h2>
@@ -75,12 +68,3 @@ async function cargarClanes() {
 }
 
 document.addEventListener("DOMContentLoaded", cargarClanes);
-
-// Menú móvil funcionalidad (igual en todos los archivos)
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-}
