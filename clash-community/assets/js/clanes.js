@@ -16,7 +16,7 @@ async function cargarClanes() {
 
     if (error) {
         contenedor.innerHTML = `<p class="text-red-500 text-center">Error cargando clanes: ${error.message}</p>`;
-        console.error("Error Supabase:", error);
+        console.error("Error Supabase Noticias:", error);
         return;
     }
 
