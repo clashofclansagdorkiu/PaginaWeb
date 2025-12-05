@@ -10,26 +10,9 @@ function formateaFecha(fechaStr) {
     });
 }
 
-function getEstadoEvento(evento) {
-    const ahora = new Date();
-    const inicio = new Date(evento.inicio);
-    const fin = new Date(evento.fin);
-    if (inicio > ahora) {
-        return { texto: "Próximos Eventos", color: "text-yellow-400", borde: "border-yellow-400", bg: "bg-yellow-900/30" };
-    } else if (inicio <= ahora && fin >= ahora) {
-        return { texto: "Evento Activo", color: "text-green-400", borde: "border-green-400", bg: "bg-green-900/30" };
-    } else {
-        return { texto: "Pasados Eventos", color: "text-red-400", borde: "border-red-400", bg: "bg-red-900/30" };
-    }
-}
-
 function renderEventoCard(evento) {
-    const estado = getEstadoEvento(evento);
     return `
-        <div class="relative bg-gray-800/80 ${estado.bg} border ${estado.borde} shadow-xl rounded-xl p-5 hover:scale-105 transition transform duration-300 backdrop-blur-sm flex flex-col">
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold ${estado.color} border ${estado.borde} bg-black/60 z-10">
-                ${estado.texto}
-            </span>
+        <div class="bg-gray-800/80 border border-gray-700 shadow-xl rounded-xl p-5 hover:scale-105 transition transform duration-300 backdrop-blur-sm flex flex-col">
             ${evento.imagen ? `
                 <img src="${evento.imagen}"
                     class="w-full h-40 object-cover rounded-lg mb-3 border border-gray-600 bg-black/50"
@@ -66,23 +49,45 @@ async function cargarEventos() {
         error = result.error;
     }
 
-    const contenedor = document.getElementById("eventosContainer");
-    
     if (error) {
-        contenedor.innerHTML = `<p class="text-red-500 text-center">Error: ${error.message}</p>`;
+        document.getElementById("eventosContainer").innerHTML = `<p class="text-red-500 text-center">Error: ${error.message}</p>`;
         return;
     }
 
-    if (!eventos || eventos.length === 0) {
-        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos.</p>`;
-        return;
+    const ahora = new Date();
+    const proximos = [];
+    const activos = [];
+    const pasados = [];
+
+    if (eventos && eventos.length > 0) {
+        eventos.forEach(ev => {
+            const inicio = new Date(ev.inicio);
+            const fin = new Date(ev.fin);
+            if (inicio > ahora) {
+                proximos.push(ev);
+            } else if (inicio <= ahora && fin >= ahora) {
+                activos.push(ev);
+            } else {
+                pasados.push(ev);
+            }
+        });
     }
 
-    contenedor.innerHTML = `
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            ${eventos.map(renderEventoCard).join('')}
-        </div>
-    `;
+    // Renderiza cada sección
+    document.getElementById("proximosEventosGrid").innerHTML =
+        proximos.length
+            ? proximos.map(renderEventoCard).join('')
+            : `<p class="col-span-3 text-center text-gray-400">No hay próximos eventos.</p>`;
+
+    document.getElementById("activosEventosGrid").innerHTML =
+        activos.length
+            ? activos.map(renderEventoCard).join('')
+            : `<p class="col-span-3 text-center text-gray-400">No hay eventos activos.</p>`;
+
+    document.getElementById("pasadosEventosGrid").innerHTML =
+        pasados.length
+            ? pasados.map(renderEventoCard).join('')
+            : `<p class="col-span-3 text-center text-gray-400">No hay eventos pasados.</p>`;
 }
 
 document.addEventListener("DOMContentLoaded", cargarEventos);
