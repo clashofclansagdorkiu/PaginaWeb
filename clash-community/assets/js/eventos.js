@@ -51,14 +51,25 @@ function renderEventoCard(evento) {
 }
 
 async function cargarEventos() {
-    // Intenta con el nombre exacto de la tabla
-    const { data: eventos, error } = await client
+    // Intenta primero con "Eventos" (con mayúscula)
+    let { data: eventos, error } = await client
         .from("Eventos")
         .select("*")
         .order("inicio", { ascending: true });
 
+    // Si falla, intenta con "eventos" (minúsculas)
+    if (error || !eventos) {
+        console.log("❌ Fallido con 'Eventos', intentando con 'eventos' minúscula...");
+        const result = await client
+            .from("eventos")
+            .select("*")
+            .order("inicio", { ascending: true });
+        eventos = result.data;
+        error = result.error;
+    }
+
     // Log detallado
-    console.log("🔍 Consulta a tabla 'Eventos':", { eventos, error });
+    console.log("🔍 Consulta a tabla:", { eventos, error });
     
     if (error) {
         console.error("❌ Error en consulta:", error.message);
@@ -73,8 +84,8 @@ async function cargarEventos() {
     console.log("📊 Número de eventos:", eventos?.length || 0);
 
     if (!eventos || eventos.length === 0) {
-        console.warn("⚠️ No hay eventos. Verifica el nombre de la tabla en Supabase.");
-        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos.</p>`;
+        console.warn("⚠️ No hay eventos. Verifica:\n1. Que haya datos en la tabla\n2. Las políticas RLS permitan lectura pública\n3. El nombre de la tabla sea exacto");
+        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos. Inserta datos de prueba en Supabase.</p>`;
         return;
     }
 
