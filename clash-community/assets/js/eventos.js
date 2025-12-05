@@ -51,25 +51,30 @@ function renderEventoCard(evento) {
 }
 
 async function cargarEventos() {
+    // Intenta con el nombre exacto de la tabla
     const { data: eventos, error } = await client
         .from("Eventos")
         .select("*")
         .order("inicio", { ascending: true });
 
-    // Log de depuración
-    console.log("Resultado consulta eventos:", { eventos, error });
-
-    const contenedor = document.getElementById("eventosContainer");
+    // Log detallado
+    console.log("🔍 Consulta a tabla 'Eventos':", { eventos, error });
+    
     if (error) {
-        contenedor.innerHTML =
-            `<p class="text-red-500 text-center">Error cargando eventos: ${error.message}</p>`;
-        console.error("Error Supabase Eventos:", error);
+        console.error("❌ Error en consulta:", error.message);
+        const contenedor = document.getElementById("eventosContainer");
+        contenedor.innerHTML = `<p class="text-red-500 text-center">Error: ${error.message}</p>`;
         return;
     }
 
+    const contenedor = document.getElementById("eventosContainer");
+    
+    console.log("✅ Resultado:", eventos);
+    console.log("📊 Número de eventos:", eventos?.length || 0);
+
     if (!eventos || eventos.length === 0) {
-        contenedor.innerHTML =
-            `<p class="col-span-3 text-center text-gray-400">No hay eventos en la base de datos.</p>`;
+        console.warn("⚠️ No hay eventos. Verifica el nombre de la tabla en Supabase.");
+        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos.</p>`;
         return;
     }
 
