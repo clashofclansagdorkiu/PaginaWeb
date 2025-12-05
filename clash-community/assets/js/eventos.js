@@ -11,6 +11,14 @@ function formateaFecha(fechaStr) {
 }
 
 function renderEventoCard(evento) {
+    // Mapeo de tipos a textos legibles
+    const tiposEvento = {
+        'COC': 'Evento de Clash Of Clans',
+        'COMUNIDAD': 'Evento de la Comunidad',
+        'OTRO': 'Otro Evento'
+    };
+    const tipoTexto = tiposEvento[evento.tipo?.toUpperCase()] || 'Evento';
+
     return `
         <div class="bg-gray-800/80 border border-gray-700 shadow-xl rounded-xl p-5 hover:scale-105 transition transform duration-300 backdrop-blur-sm flex flex-col">
             ${evento.imagen ? `
@@ -18,7 +26,8 @@ function renderEventoCard(evento) {
                     class="w-full h-40 object-cover rounded-lg mb-3 border border-gray-600 bg-black/50"
                     alt="Imagen del evento">
             ` : ''}
-            <h3 class="text-xl font-hispanic text-yellow-400 mb-2 text-center">${evento.titulo}</h3>
+            <h3 class="text-xl font-hispanic text-yellow-400 mb-1 text-center">${evento.titulo}</h3>
+            <p class="text-sm text-green-400 text-center mb-2 italic">${tipoTexto}</p>
             <p class="text-gray-200 mb-3 text-center">${evento.descripcion}</p>
             <div class="text-sm text-gray-300 mb-2 text-center">
                 <span class="font-bold text-yellow-400">Inicio:</span> ${formateaFecha(evento.inicio)}<br>
