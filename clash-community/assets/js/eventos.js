@@ -52,8 +52,10 @@ async function cargarEventos() {
     if (!eventos || eventos.length === 0) {
         document.getElementById("proximosEventosGrid").innerHTML =
             `<p class="col-span-3 text-center text-gray-400">No hay eventos en la base de datos.</p>`;
-        document.getElementById("activosEventosGrid").innerHTML = "";
-        document.getElementById("pasadosEventosGrid").innerHTML = "";
+        document.getElementById("activosEventosGrid").innerHTML =
+            `<p class="col-span-3 text-center text-gray-400">No hay eventos en la base de datos.</p>`;
+        document.getElementById("pasadosEventosGrid").innerHTML =
+            `<p class="col-span-3 text-center text-gray-400">No hay eventos en la base de datos.</p>`;
         return;
     }
 
