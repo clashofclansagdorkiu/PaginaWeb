@@ -35,14 +35,25 @@ function renderEventoCard(evento) {
 
 async function cargarEventos() {
     const { data: eventos, error } = await client
-        .from("Eventos")
+        .from("Eventos") // Asegúrate que la tabla se llama exactamente así, con mayúscula inicial
         .select("*")
         .order("inicio", { ascending: true });
+
+    // Log de depuración
+    console.log("Resultado consulta eventos:", { eventos, error });
 
     if (error) {
         document.getElementById("eventosContainer").innerHTML =
             `<p class="text-red-500 text-center">Error cargando eventos: ${error.message}</p>`;
         console.error("Error Supabase Eventos:", error);
+        return;
+    }
+
+    if (!eventos || eventos.length === 0) {
+        document.getElementById("proximosEventosGrid").innerHTML =
+            `<p class="col-span-3 text-center text-gray-400">No hay eventos en la base de datos.</p>`;
+        document.getElementById("activosEventosGrid").innerHTML = "";
+        document.getElementById("pasadosEventosGrid").innerHTML = "";
         return;
     }
 
@@ -52,6 +63,8 @@ async function cargarEventos() {
     const pasados = [];
 
     eventos.forEach(ev => {
+        // Log de cada evento para depuración
+        console.log("Evento:", ev);
         const inicio = new Date(ev.inicio);
         const fin = new Date(ev.fin);
         if (inicio > ahora) {
