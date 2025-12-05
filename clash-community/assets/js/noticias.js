@@ -96,13 +96,13 @@ async function cargarNoticias() {
                          onerror="this.src='./images/Logo_BdL.png'; this.classList.remove('object-cover', 'aspect-[16/9]'); this.classList.add('p-8', 'bg-gray-900', 'object-contain')">
                 </div>
                 <!-- Bloque de Texto y Botón (70% en escritorio, 100% en móvil) -->
-                <div class="w-full md:w-2/3 flex flex-col justify-between">
+                <div class="w-full md:w-2/3 flex flex-col justify-between max-h-64 overflow-y-auto">
                     <div>
                         <h2 class="text-3xl font-hispanic font-bold text-yellow-400 mb-2">${noticia.titulo}</h2>
                         <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                            Publicado el ${fechaFormateada}
                         </p>
-                        <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
+                        <p class="text-gray-300 whitespace-pre-wrap line-clamp-3">${noticia.cuerpo}</p>
                     </div>
                     <!-- Botón de Acción Condicional -->
                     ${noticia.boton_texto && noticia.boton_enlace ? `
@@ -122,7 +122,7 @@ async function cargarNoticias() {
                 <p class="text-sm text-gray-400 mb-4 border-b border-gray-700 pb-2">
                    Publicado el ${fechaFormateada}
                 </p>
-                <p class="text-gray-300 whitespace-pre-wrap">${noticia.cuerpo}</p>
+                <p class="text-gray-300 whitespace-pre-wrap line-clamp-4">${noticia.cuerpo}</p>
                 
                 <!-- Botón de Acción Condicional -->
                 ${noticia.boton_texto && noticia.boton_enlace ? `
