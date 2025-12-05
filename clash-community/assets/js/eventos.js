@@ -30,10 +30,11 @@ function renderEventoCard(evento) {
             <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold ${estado.color} border ${estado.borde} bg-black/60 z-10">
                 ${estado.texto}
             </span>
-            <img src="${evento.imagen || './images/Logo_BdL.png'}"
-                class="w-full h-40 object-cover rounded-lg mb-3 border border-gray-600 bg-black/50"
-                alt="Imagen del evento"
-                onerror="this.src='./images/Logo_BdL.png'">
+            ${evento.imagen ? `
+                <img src="${evento.imagen}"
+                    class="w-full h-40 object-cover rounded-lg mb-3 border border-gray-600 bg-black/50"
+                    alt="Imagen del evento">
+            ` : ''}
             <h3 class="text-xl font-hispanic text-yellow-400 mb-2 text-center">${evento.titulo}</h3>
             <p class="text-gray-200 mb-3 text-center">${evento.descripcion}</p>
             <div class="text-sm text-gray-300 mb-2 text-center">
@@ -51,15 +52,12 @@ function renderEventoCard(evento) {
 }
 
 async function cargarEventos() {
-    // Intenta primero con "Eventos" (con mayúscula)
     let { data: eventos, error } = await client
         .from("Eventos")
         .select("*")
         .order("inicio", { ascending: true });
 
-    // Si falla, intenta con "eventos" (minúsculas)
     if (error || !eventos) {
-        console.log("❌ Fallido con 'Eventos', intentando con 'eventos' minúscula...");
         const result = await client
             .from("eventos")
             .select("*")
@@ -68,28 +66,18 @@ async function cargarEventos() {
         error = result.error;
     }
 
-    // Log detallado
-    console.log("🔍 Consulta a tabla:", { eventos, error });
+    const contenedor = document.getElementById("eventosContainer");
     
     if (error) {
-        console.error("❌ Error en consulta:", error.message);
-        const contenedor = document.getElementById("eventosContainer");
         contenedor.innerHTML = `<p class="text-red-500 text-center">Error: ${error.message}</p>`;
         return;
     }
 
-    const contenedor = document.getElementById("eventosContainer");
-    
-    console.log("✅ Resultado:", eventos);
-    console.log("📊 Número de eventos:", eventos?.length || 0);
-
     if (!eventos || eventos.length === 0) {
-        console.warn("⚠️ No hay eventos. Verifica:\n1. Que haya datos en la tabla\n2. Las políticas RLS permitan lectura pública\n3. El nombre de la tabla sea exacto");
-        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos. Inserta datos de prueba en Supabase.</p>`;
+        contenedor.innerHTML = `<p class="text-yellow-400 text-center">No hay eventos en la base de datos.</p>`;
         return;
     }
 
-    // Renderiza todos los eventos en una sola grid
     contenedor.innerHTML = `
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             ${eventos.map(renderEventoCard).join('')}
