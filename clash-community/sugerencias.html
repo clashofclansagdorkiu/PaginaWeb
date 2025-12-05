@@ -136,6 +136,14 @@
     <script src="./assets/js/sugerencias.js"></script>
 
     <script>
+        // Menú móvil funcionalidad
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lógica de anónimo
         const nombreInput = document.getElementById('nombre');
         const anonimCheckbox = document.getElementById('anonimo');
 

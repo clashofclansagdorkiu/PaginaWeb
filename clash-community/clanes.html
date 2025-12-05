@@ -59,8 +59,8 @@
 
         <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
             <a href="noticias.html" class="menu-link block">Noticias</a>
-            <a href="#" class="menu-link block">Eventos</a>
             <a href="./clanes.html" class="menu-link block text-yellow-400">Clanes</a>
+            <a href="#" class="menu-link block">Eventos</a>
             <a href="sugerencias.html" class="menu-link block">Sugerencias</a>
             <a href="#" class="menu-link block">Donaciones</a>
         </div>
@@ -93,6 +93,14 @@
 <!-- 🟩 Script que usa la librería -->
 <script src="./assets/js/clanes.js"></script>
 
+<script>
+    // Menú móvil funcionalidad
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
 
 </body>
 </html>
