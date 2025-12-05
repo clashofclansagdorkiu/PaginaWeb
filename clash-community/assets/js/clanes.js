@@ -36,8 +36,6 @@ async function cargarClanes() {
 
         // Validación extra por si el tag viene sin # o es nulo
         const tagLimpio = clan.tag ? clan.tag.replace('#','') : ''; 
-// ... dentro del forEach ...
-
         // SOLUCIÓN: Usamos la URL que guardaste en la base de datos.
         // Si el campo está vacío, usa el logo por defecto.
         const imagenClan = clan.logo_url || './images/Logo_BdL.png';
@@ -77,3 +75,12 @@ async function cargarClanes() {
 }
 
 document.addEventListener("DOMContentLoaded", cargarClanes);
+
+// Menú móvil funcionalidad (igual en todos los archivos)
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+}

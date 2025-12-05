@@ -42,3 +42,12 @@ document.getElementById("sugerenciaForm").addEventListener("submit", async (e) =
         estado.className = "text-center text-red-400 font-bold";
     }
 });
+
+// Menú móvil funcionalidad (igual en todos los archivos)
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+}

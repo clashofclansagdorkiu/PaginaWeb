@@ -1,6 +1,6 @@
-const btn = document.getElementById('mobileMenuBtn');
-const menu = document.getElementById('mobileMenu');
-
-btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
+// Menú móvil funcionalidad
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
 });
