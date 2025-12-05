@@ -77,12 +77,12 @@
 
             <!-- Nombre -->
             <label class="block mb-2 font-hispanic text-lg">Nombre (o Anónimo):</label>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-col md:flex-row md:items-center md:gap-3 gap-2">
                 <input id="nombre" type="text" placeholder="Escriba su nombre"
                        class="flex-1 p-3 rounded-lg bg-gray-900/60 border border-gray-700 text-white">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label class="flex items-center gap-2 cursor-pointer md:flex-shrink-0">
                     <input id="anonimo" type="checkbox" class="w-5 h-5 rounded border-gray-700 bg-gray-900/60 cursor-pointer">
-                    <span class="font-hispanic text-sm whitespace-nowrap">Anónimo</span>
+                    <span class="font-hispanic text-sm">Anónimo</span>
                 </label>
             </div>
             <div class="mb-5"></div>
@@ -94,6 +94,7 @@
                 <option>Clan</option>
                 <option>Comunidad</option>
                 <option>Eventos</option>
+                <option>Errores y Fallos</option>
                 <option>Otros</option>
             </select>
 
