@@ -79,7 +79,7 @@
             <label class="block mb-2 font-hispanic text-lg">Nombre (o Anónimo):</label>
             <div class="flex flex-col md:flex-row md:items-center md:gap-3 gap-2">
                 <input id="nombre" type="text" placeholder="Escriba su nombre"
-                       class="flex-1 p-3 rounded-lg bg-gray-900/60 border border-gray-700 text-white">
+                       class="flex-1 p-3 rounded-lg bg-gray-900/60 border border-gray-700 text-white transition-all">
                 <label class="flex items-center gap-2 cursor-pointer md:flex-shrink-0">
                     <input id="anonimo" type="checkbox" class="w-5 h-5 rounded border-gray-700 bg-gray-900/60 cursor-pointer">
                     <span class="font-hispanic text-sm">Anónimo</span>
@@ -151,12 +151,12 @@
         anonimCheckbox.addEventListener('change', function() {
             if (this.checked) {
                 nombreInput.value = 'Anónimo';
-                nombreInput.disabled = true;
-                nombreInput.classList.add('opacity-50', 'cursor-not-allowed');
+                nombreInput.readOnly = true;
+                nombreInput.classList.add('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
             } else {
                 nombreInput.value = '';
-                nombreInput.disabled = false;
-                nombreInput.classList.remove('opacity-50', 'cursor-not-allowed');
+                nombreInput.readOnly = false;
+                nombreInput.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-800/50');
             }
         });
     </script>
